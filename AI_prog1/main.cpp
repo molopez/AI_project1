@@ -20,12 +20,12 @@ int main ( )
 	Map map;
 
 	// Enter location file
-	cout << "Please Enter a LOCATIONS file name" << endl;
+	cout << "Please Enter a LOCATIONS path and filename, and press ENTER " << endl;
 	getline(cin, fileName);
 	map.setLocations(fileName);
 
 	//  Enter connections file
-	cout << "Please Enter a CONNECTIONS file name" << endl;
+	cout << "Please Enter a CONNECTIONS path and filename, and press ENTER " << endl;
 	getline(cin, fileName);
 	map.setConnections(fileName);
 
@@ -36,15 +36,15 @@ int main ( )
 
 		string start, finish, omit;
 	
-		cout << "Enter starting city: " ;
+		cout << "Enter starting city, and press ENTER " ;
 		cin >> start;
 		transform(start.begin(), start.end(),start.begin(), ::toupper);
 
-		cout << "Enter ending city: ";
+		cout << "Enter ending city, and press ENTER ";
 		cin >> finish;
 		transform(finish.begin(), finish.end(),finish.begin(), ::toupper);
 
-		cout << "Enter city to omit or type 'none' if you do not wish to omit a city: ";
+		cout << "Enter city to omit or type 'none' if you do not wish to omit a city, and press ENTER ";
 		cin >> omit;
 		if(omit.compare("none") == 0)
 			omit = "";			
