@@ -32,7 +32,7 @@ int main ( )
 	cin >> finish;
 	transform(finish.begin(), finish.end(),finish.begin(), ::toupper);
 
-	cout << "Enter city to omit or type none if you do not wish to ommit a city: ";
+	cout << "Enter city to omit or type 'none' if you do not wish to ommit a city: ";
 	cin >> omit;
 	if(omit.compare("none") == 0)
 		omit = "";			
