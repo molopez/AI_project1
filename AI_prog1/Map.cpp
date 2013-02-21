@@ -11,7 +11,7 @@ Map::Map(){}
 
 Map::~Map(void){}
 
-int Map::setLocations(string fileName)
+int Map::setLocations(string fileName) //Opens file and capture data into an object
 {
 	string line;
 	ifstream file;
@@ -44,7 +44,7 @@ int Map::setLocations(string fileName)
 	return 0;
 }
 
-int Map::setConnections(string fileName)
+int Map::setConnections(string fileName) //Opens a file containing locations and stores in an object
 {
 	string line;
 	ifstream file;
@@ -77,7 +77,7 @@ int Map::setConnections(string fileName)
 	return 0;
 }
 
-void Map::mapCities()
+void Map::mapCities() //This function sets the locations of cities in a map
 {
 	string cityName, temp, neighbor, neighborCity, tempNeighbor;
 	int locX, locY, numNeighbors, tempLoc; 
@@ -216,12 +216,18 @@ int Map::findPath(string start, string finish, string omit)
 		if(!startExists)
 		{
 			cout << start << " is not found. Unable to proceed." << endl;
+			cout << "\nPress 'ENTER' to exit program." << endl;
+			getchar();
+			getchar();
 			exit(-1);
 		}
 
 		if(!finishExists)
 		{
 			cout << finish << " is not found. Unable to proceed." << endl;
+			cout << "\nPress 'ENTER' to exit program." << endl;
+			getchar();
+			getchar();
 			exit(-1);
 		}
 
@@ -269,7 +275,7 @@ int Map::findPath(string start, string finish, string omit)
 	return 0;
 }
 
-void Map::showPath()
+void Map::showPath() // Display path found
 {
 	list<string>::iterator it2;
 
@@ -291,12 +297,12 @@ void Map::showPath()
 	}
 }
 
-int Map::heuristicDistance(City a, City b)
+int Map::heuristicDistance(City a, City b) // Calculates stright line distance between two cities
 {
 	return (int)sqrt(pow((a.getXCoordinate() - b.getXCoordinate()),2) + pow((a.getYCoordinate() - b.getYCoordinate()),2));
 }
 
-map<string, int> Map::getNeighborCities(string cityName)
+map<string, int> Map::getNeighborCities(string cityName) 
 {
 	City city = getCity(cityName);
 
@@ -309,7 +315,7 @@ map<string, int> Map::getNeighborCities(string cityName)
 	return city.getNeighbors();
 }
 
-void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity, string endCity)
+void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity, string endCity) //This function iterates over cities in a map to find the best heuristics
 {
 	int sld, dt, heuristicDist;
 	bool added = false;

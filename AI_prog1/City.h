@@ -8,6 +8,8 @@ using namespace std;
 
 class City
 {
+/* This class possesses the properties of a city */
+
 public:
 	//Constructors
 	City();

@@ -1,6 +1,6 @@
 #include "City.h"
 
-City::City()
+City::City() // Constructor
 {
 	
 }
@@ -16,11 +16,11 @@ City::City(string cityName, int x, int y)
 	distanceTraveled = 0;
 }
 
-City::~City(void)
+City::~City(void) //Destructor
 {
 }
 
-void City::addNeighbor(string cityName, int x, int y)
+void City::addNeighbor(string cityName, int x, int y) 
 {
 	Neighbor.insert(pair<string, int>(cityName, calculateDistance(x,y)));
 }
