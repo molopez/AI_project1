@@ -22,7 +22,7 @@ City::~City(void) //Destructor
 
 void City::addNeighbor(string cityName, int x, int y) 
 {
-	Neighbor.insert(pair<string, int>(cityName, calculateDistance(x,y)));
+	Neighbor.insert(pair<string, double>(cityName, calculateDistance(x,y)));
 }
 
 void City::setVisit(bool visited)
@@ -40,7 +40,7 @@ void City::setDeadEnd(bool deadEnd)
 	this->deadEnd = deadEnd;
 }
 
-void City::setDistanceTraveled(int distance)
+void City::setDistanceTraveled(double distance)
 {
 	distanceTraveled = distance;
 }
@@ -70,14 +70,14 @@ string City::getPreviousCity(void)
 	return previousCity;
 }
 
-int City::getDistanceTraveled(void)
+double City::getDistanceTraveled(void)
 {
 	return distanceTraveled;
 }
 
-int  City::calculateDistance(int x, int y)
+double  City::calculateDistance(int x, int y)
 {
-	return (int)sqrt(pow(xCoordinate - x,2) + pow(yCoordinate - y,2));
+	return sqrt(pow(xCoordinate - x,2) + pow(yCoordinate - y,2));
 }
 
 void City::toString(void)
@@ -94,7 +94,7 @@ void City::printNeighbors(void)
 {
 	cout << cityName << " neighbors: ";
 
-	for(map<string,int>::iterator it = Neighbor.begin(); it != Neighbor.end(); ++it)
+	for(map<string, double>::iterator it = Neighbor.begin(); it != Neighbor.end(); ++it)
 	{
 		cout << it->first << " " << it->second << " ";
 	}
@@ -110,7 +110,7 @@ int City::getYCoordinate(void)
 	return yCoordinate;
 }
 
-map<string, int> City::getNeighbors()
+map<string, double> City::getNeighbors()
 {
 	return Neighbor;
 }

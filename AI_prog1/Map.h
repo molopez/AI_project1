@@ -13,7 +13,7 @@ private:
 	vector<string> locations;
 	vector<City> cities;
 	list<string> path;
-	map<string, int> heuristics;
+	map<string, double> heuristics;
 	string startCity, endCity, omitCity;
 	bool pathFound;
 	
@@ -29,7 +29,7 @@ public:
 	//Finds the shortest path from one city to another
 	//takes as arguments:
 	//starting city, ending city, city to omit
-	void findPath(string start, string finish, string omit, string heuristicType);
+	int findPath(string start, string finish, string omit, string heuristicType);
 	
 	//Display the shortest path from one city to another
 	//if one is found
@@ -61,18 +61,18 @@ private:
 
 	//computes the straight line distance from
 	//a city to the ending city
-	int heuristicDistance(City, City);
+	double heuristicDistance(City, City);
 
 	//pass in the name of the city
 	//and returns its neighbors
-	map<string, int> getNeighborCities(string);
+	map<string, double> getNeighborCities(string);
 
 	//for each adjacent(neighbor) city
 	//pass the city, distance from current city, the current city and the ending city
 	//Method will calculate the SLD + DT and add the 
 	//city and the heuristic distance to the 
 	//heuristics map structure
-	void setupHeuristic(string, int, string, string);
+	void setupHeuristic(string, double, string, string);
 
 	//finds the next city that would give us the
 	//next shortest distance to travel through

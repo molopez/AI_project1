@@ -21,13 +21,13 @@ public:
 	void setVisit(bool);
 	void setOmission(bool);
 	void setDeadEnd(bool deadEnd);
-	void setDistanceTraveled(int);
+	void setDistanceTraveled(double);
 	void setPreviousCity(string);
 	bool getVisit(void);
 	bool getOmmission(void);
 	bool getDeadEnd(void);
 	string getPreviousCity(void);
-	int getDistanceTraveled(void);
+	double getDistanceTraveled(void);
 	void toString(void);
 	string getCityName(void);
 	void printNeighbors(void);
@@ -37,16 +37,17 @@ public:
 	//this functions will return the 
 	//map structure that contains the
 	//adjacent(neighbor) cities
-	map<string, int> getNeighbors();
+	map<string, double> getNeighbors();
 	
 
 private:
 	//Properties
 	string cityName, previousCity;
-	int xCoordinate, yCoordinate, distanceTraveled;
+	int xCoordinate, yCoordinate;
+	double distanceTraveled;
 	bool visited, omitted, deadEnd;
-	map<string,int> Neighbor;
+	map<string, double> Neighbor;
 
 	//Methods
-	int calculateDistance(int,int);
+	double calculateDistance(int,int);
 };

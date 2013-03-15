@@ -190,14 +190,14 @@ void Map::printMap()
 	}
 }
 
-void Map::findPath(string start, string finish, string omit, string heuristicType)
+int Map::findPath(string start, string finish, string omit, string heuristicType)
 {
 	if(heuristicType == "Shortest Distance")
 	{
-		AStar_ShortestDistance(start, finish, omit);
+		return AStar_ShortestDistance(start, finish, omit);
 	}
 	else
-		AStar_MinHops(start, finish, omit);
+		return AStar_MinHops(start, finish, omit);
 }
 
 int Map::AStar_ShortestDistance(string start, string finish, string omit)
@@ -258,7 +258,7 @@ int Map::AStar_ShortestDistance(string start, string finish, string omit)
 
 
 	string currentCity = start;
-	map<string, int> currentNeighbors;
+	map<string, double> currentNeighbors;
 
 	//A* Algorithm functionality
 	while(currentCity != endCity)
@@ -271,7 +271,7 @@ int Map::AStar_ShortestDistance(string start, string finish, string omit)
 		currentNeighbors = getNeighborCities(currentCity);
 
 		//iterate through the adjacent cities and set up the heuristics map structure
-		for(map<string, int>::iterator it = currentNeighbors.begin(); it != currentNeighbors.end(); ++it)
+		for(map<string, double>::iterator it = currentNeighbors.begin(); it != currentNeighbors.end(); ++it)
 		{
 			//adds neighbors to the heuristics map structure
 			setupHeuristic(it->first, it->second, currentCity, endCity);
@@ -321,12 +321,12 @@ void Map::showPath() // Display path found
 	}
 }
 
-int Map::heuristicDistance(City a, City b) // Calculates stright line distance between two cities
+double Map::heuristicDistance(City a, City b) // Calculates stright line distance between two cities
 {
-	return (int)sqrt(pow((a.getXCoordinate() - b.getXCoordinate()),2) + pow((a.getYCoordinate() - b.getYCoordinate()),2));
+	return sqrt(pow((a.getXCoordinate() - b.getXCoordinate()),2) + pow((a.getYCoordinate() - b.getYCoordinate()),2));
 }
 
-map<string, int> Map::getNeighborCities(string cityName) 
+map<string, double> Map::getNeighborCities(string cityName) 
 {
 	City city = getCity(cityName);
 
@@ -339,9 +339,9 @@ map<string, int> Map::getNeighborCities(string cityName)
 	return city.getNeighbors();
 }
 
-void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity, string endCity) //This function iterates over cities in a map to find the best heuristics
+void Map::setupHeuristic(string neighbor, double distFromPrevCity, string prevCity, string endCity) //This function iterates over cities in a map to find the best heuristics
 {
-	int sld, dt, heuristicDist;
+	double sld, dt, heuristicDist;
 	bool added = false;
 
 	City thisNeighbor = getCity(neighbor);									 //get the neighbor city
@@ -356,7 +356,7 @@ void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity,
 		dt = previousCity.getDistanceTraveled() + distFromPrevCity;			 //find the distance that would be traveled if this path is shosen paths
 		heuristicDist = sld + dt; //this is the distance used for our huristic
 		
-		for(map<string, int>::iterator it = heuristics.begin(); it != heuristics.end(); ++it)
+		for(map<string, double>::iterator it = heuristics.begin(); it != heuristics.end(); ++it)
 		{
 			if(it->first.compare(neighbor) == 0)
 			{
@@ -370,7 +370,7 @@ void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity,
 
 					added = true;
 					heuristics.erase(neighbor);
-					heuristics.insert(pair<string, int>(neighbor, heuristicDist));		 //add the city and the heuristic distance to the map structure
+					heuristics.insert(pair<string, double>(neighbor, heuristicDist));		 //add the city and the heuristic distance to the map structure
 																						 //that is holding our cities to choose a from to form the path
 					break;
 				}				
@@ -387,7 +387,7 @@ void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity,
 			updateDistanceTraveled(thisNeighbor);
 
 			
-			heuristics.insert(pair<string, int>(neighbor, heuristicDist));		 //add the city and the heuristic distance to the map structure
+			heuristics.insert(pair<string, double>(neighbor, heuristicDist));		 //add the city and the heuristic distance to the map structure
 																				 //that is holding our cities to choose a from to form the path
 
 		/*cout<< "city: " << neighbor << " prev: " <<prevCity << "\tdt: " << previousCity.getDistanceTraveled()
@@ -398,10 +398,10 @@ void Map::setupHeuristic(string neighbor, int distFromPrevCity, string prevCity,
 
 string Map::getNextCity()
 {
-	int min = heuristics.begin() -> second;
+	double min = heuristics.begin() -> second;
 	string nextCity = heuristics.begin() -> first;
 
-	for(map<string, int>::iterator it = heuristics.begin(); it != heuristics.end(); ++it)
+	for(map<string, double>::iterator it = heuristics.begin(); it != heuristics.end(); ++it)
 	{
 		if(it->second < min)
 		{
