@@ -29,7 +29,7 @@ public:
 	//Finds the shortest path from one city to another
 	//takes as arguments:
 	//starting city, ending city, city to omit
-	int findPath(string start, string finish, string omit);
+	void findPath(string start, string finish, string omit, string heuristicType);
 	
 	//Display the shortest path from one city to another
 	//if one is found
@@ -38,6 +38,15 @@ public:
 	void printMap();
 
 private:
+
+	//Finds the shortest path from one city to another
+	//uses the straight line distance and shortest distance as a heuristic
+	int AStar_ShortestDistance(string start, string finish, string omit);
+
+	//Finds the shortest path from one city to another
+	//uses the minimum number of hops as a heuristic
+	int AStar_MinHops(string start, string finish, string omit);
+
 	//Retrieve the locations file
 	//takes the path to where the file is located
 	//returns 0 if file is found
@@ -83,4 +92,6 @@ private:
 	void updateDistanceTraveled(City);
 
 	void updateDeadEnd(City);
+
+	void clearCityProperties();
 };

@@ -55,7 +55,7 @@ int main ( )
 	
 		//cout << start << " " << finish << " " << omit << endl;
 
-		map.findPath(start, finish, omit);
+		map.findPath(start, finish, omit, "Shortest Distance");
 	}
 
 	map.showPath();

@@ -190,11 +190,23 @@ void Map::printMap()
 	}
 }
 
-int Map::findPath(string start, string finish, string omit)
+void Map::findPath(string start, string finish, string omit, string heuristicType)
+{
+	if(heuristicType == "Shortest Distance")
+	{
+		AStar_ShortestDistance(start, finish, omit);
+	}
+	else
+		AStar_MinHops(start, finish, omit);
+}
+
+int Map::AStar_ShortestDistance(string start, string finish, string omit)
 {
 	startCity = start; endCity = finish; omitCity = omit;
 
 	bool startExists = false, finishExists = false, omitExists = false;
+
+	clearCityProperties(); //clear any properties that the cities may have previously set
 
 	for(vector<City>::iterator it = cities.begin(); it != cities.end(); ++it)
 	{
@@ -278,6 +290,12 @@ int Map::findPath(string start, string finish, string omit)
 
 	buildPath();
 	pathFound = true;
+	return 0;
+}
+
+int Map::AStar_MinHops(string start, string finish, string omit)
+{
+	cout << "not implemented yet.\n" << endl;
 	return 0;
 }
 
@@ -479,4 +497,16 @@ void Map::buildPath()
 		nextCity = getCity(nextCity.getPreviousCity());
 	}
 	path.push_front(nextCity.getCityName());	
+}
+
+void Map::clearCityProperties()
+{
+	for (vector<City>::iterator it = cities.begin(); it != cities.end(); ++it)
+	{
+		it->setVisit(false);
+		it->setOmission(false);
+		it->setDeadEnd(false);
+		it->setDistanceTraveled(0);
+		it->setPreviousCity("");
+	}
 }
