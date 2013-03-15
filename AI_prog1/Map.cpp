@@ -9,6 +9,12 @@ using namespace std;
  
 Map::Map(){}
 
+Map::Map(string locations, string connections)
+{
+	setLocations(locations);
+	setConnections(connections);
+}
+
 Map::~Map(void){}
 
 int Map::setLocations(string fileName) //Opens file and capture data into an object

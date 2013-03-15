@@ -16,18 +16,20 @@ using namespace std;
 
 int main ( )
 {
-	string fileName, line;
-	Map map;
+	string fileLocations, fileConnections, line;
+	//Map map;
 
 	// Enter location file
 	cout << "Please Enter a LOCATIONS path and filename, and press ENTER " << endl;
-	getline(cin, fileName);
-	map.setLocations(fileName);
+	getline(cin, fileLocations);
+	//map.setLocations(fileName);
 
 	//  Enter connections file
 	cout << "Please Enter a CONNECTIONS path and filename, and press ENTER " << endl;
-	getline(cin, fileName);
-	map.setConnections(fileName);
+	getline(cin, fileConnections);
+	//map.setConnections(fileName);
+
+	Map map(fileLocations, fileConnections);
 
 	map.mapCities();
 	//map.printMap();

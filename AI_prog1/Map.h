@@ -21,6 +21,23 @@ public:
 	Map();
 	~Map();
 
+	Map(string locations, string connections);
+
+	//Creates the map of the cities
+	void mapCities();
+
+	//Finds the shortest path from one city to another
+	//takes as arguments:
+	//starting city, ending city, city to omit
+	int findPath(string start, string finish, string omit);
+	
+	//Display the shortest path from one city to another
+	//if one is found
+	void showPath();	
+
+	void printMap();
+
+private:
 	//Retrieve the locations file
 	//takes the path to where the file is located
 	//returns 0 if file is found
@@ -33,21 +50,6 @@ public:
 	// return -1 if file is not found
 	int setConnections( string );
 
-	//Creates the map of the cities
-	void mapCities();
-
-	//Finds the shortest path from one city to another
-	//takes as arguments:
-	//starting city, ending city, city to omit
-	int findPath(string, string, string);
-	
-	//Display the shortest path from one city to another
-	//if one is found
-	void showPath();	
-
-	void printMap();
-
-private:
 	//computes the straight line distance from
 	//a city to the ending city
 	int heuristicDistance(City, City);
