@@ -17,6 +17,12 @@ Map::Map(string locations, string connections)
 
 Map::~Map(void){}
 
+Map::buildMap(string locations, string connections)
+{
+    setLocations(locations);
+    setConnections(connections);
+}
+
 int Map::setLocations(string fileName) //Opens file and capture data into an object
 {
 	string line;

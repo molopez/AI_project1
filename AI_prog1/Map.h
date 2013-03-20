@@ -19,12 +19,16 @@ private:
 	
 public: 
 	Map();
-	~Map();
+    ~Map();
 
 	Map(string locations, string connections);
 
 	//Creates the map of the cities
 	void mapCities();
+
+    //Builds the map,
+    //To be used if the empty constructor was used
+    void buildMap(string locations, string connections);
 
 	//Finds the shortest path from one city to another
 	//takes as arguments:
