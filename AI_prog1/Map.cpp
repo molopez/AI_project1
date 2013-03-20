@@ -17,7 +17,7 @@ Map::Map(string locations, string connections)
 
 Map::~Map(void){}
 
-Map::buildMap(string locations, string connections)
+void Map::buildMap(string locations, string connections)
 {
     setLocations(locations);
     setConnections(connections);
